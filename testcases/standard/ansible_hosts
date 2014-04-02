@@ -1,27 +1,27 @@
-controller ansible_ssh_host=10.1.0.2
-compute ansible_ssh_host=10.1.0.3
-network ansible_ssh_host=10.1.0.4
-storage ansible_ssh_host=10.1.0.5
+controller ansible_ssh_host=10.11.0.2
+compute ansible_ssh_host=10.11.0.3
+network ansible_ssh_host=10.11.0.4
+storage ansible_ssh_host=10.11.0.5
 
 [all:vars]
 external_ntp_host = uk.pool.ntp.org
 
-management_network = 10.1.0.0/16
-api_network = 10.2.0.0/16
+management_network = 10.11.0.0/16
+api_network = 10.12.0.0/16
 
 external_network_name = public
 
 [neutron:vars]
-data_network = 10.3.0.0/16
-external_network = 10.4.0.0/16
-external_network_gateway_ip = 10.4.0.4
+data_network = 10.13.0.0/16
+external_network = 10.14.0.0/16
+external_network_gateway_ip = 10.14.0.4
 external_network_dns_nameservers = 8.8.8.8
-external_network_allocation_pool_start = 10.4.10.100
-external_network_allocation_pool_end = 10.4.250.250
+external_network_allocation_pool_start = 10.14.10.100
+external_network_allocation_pool_end = 10.14.250.250
 
 [swift:vars]
-storage_network = 10.5.0.0/16
-replication_network = 10.6.0.0/16
+storage_network = 10.15.0.0/16
+replication_network = 10.16.0.0/16
 
 [mysql]
 controller
