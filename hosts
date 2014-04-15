@@ -1,27 +1,30 @@
-controller ansible_ssh_host=10.2.0.190 ansible_ssh_user=ubuntu ansible_sudo_pass=ubuntu
-compute ansible_ssh_host=10.2.0.252 ansible_ssh_user=ubuntu ansible_sudo_pass=ubuntu
-network ansible_ssh_host=10.2.0.146 ansible_ssh_user=ubuntu ansible_sudo_pass=ubuntu
-storage ansible_ssh_host=10.2.0.147 ansible_ssh_user=ubuntu ansible_sudo_pass=ubuntu
+controller ansible_ssh_host=10.2.0.10 ansible_ssh_user=root ansible_ssh_pass=ubuntu
+network ansible_ssh_host=10.2.0.11 ansible_ssh_user=root ansible_ssh_pass=ubuntu
+node3 ansible_ssh_host=10.2.0.12 ansible_ssh_user=root ansible_ssh_pass=ubuntu
+node4 ansible_ssh_host=10.2.0.13 ansible_ssh_user=root ansible_ssh_pass=ubuntu
+node6 ansible_ssh_host=10.2.0.15 ansible_ssh_user=root ansible_ssh_pass=ubuntu
+node7 ansible_ssh_host=10.2.0.16 ansible_ssh_user=root ansible_ssh_pass=ubuntu
+node8 ansible_ssh_host=10.2.0.16 ansible_ssh_user=root ansible_ssh_pass=ubuntu
 
 [all:vars]
 external_ntp_host = pool.ntp.org
 
 management_network = 10.2.0.0/16
-api_network = 10.12.0.0/16
+api_network = 10.3.0.0/16
 
 external_network_name = public
 
 [neutron:vars]
-data_network = 10.13.0.0/16
-external_network = 10.14.0.0/16
-external_network_gateway_ip = 10.14.0.4
+data_network = 10.4.0.0/16
+external_network = 103.249.57.0/25
+external_network_gateway_ip = 103.249.57.1
 external_network_dns_nameservers = 8.8.8.8
-external_network_allocation_pool_start = 10.14.10.100
-external_network_allocation_pool_end = 10.14.250.250
+external_network_allocation_pool_start = 103.249.57.100
+external_network_allocation_pool_end = 103.249.57.126
 
 [swift:vars]
-storage_network = 10.15.0.0/16
-replication_network = 10.16.0.0/16
+storage_network = 10.5.0.0/16
+replication_network = 10.6.0.0/16
 
 [mysql]
 controller
@@ -49,7 +52,10 @@ nova-compute
 controller
 
 [nova-compute]
-compute
+node4
+node6
+node7
+node8
 
 [neutron:children]
 neutron-api
@@ -70,7 +76,7 @@ swift-storage
 controller
 
 [swift-storage]
-storage
+controller
 
 [cinder:children]
 cinder-api
@@ -84,7 +90,7 @@ controller
 controller
 
 [cinder-volume]
-storage
+controller
 
 [dashboard]
 controller
