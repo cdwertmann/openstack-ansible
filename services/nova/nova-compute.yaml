@@ -20,7 +20,9 @@
       with_items:
         - "{{ nova_compute_package }}"
         - python-guestfs
-      
+        - nfs-common
+        - sysfsutils
+
     - name: ensure services are stopped
       service: 
         name: nova-compute 

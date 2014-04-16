@@ -5,6 +5,26 @@
   gather_facts: True
   tasks:
 
+    - name: add 10.1.0.x IP addresses
+      command: ip addr add dev bond0 {{ hostvars[ansible_hostname]|find_ip(management_network)| regex_replace('\d+.\d+.\d+.', '10.1.0.1') }}/16
+      ignore_errors: yes
+
+    - name: add 10.3.0.x IP addresses
+      command: ip addr add dev bond0 {{ hostvars[ansible_hostname]|find_ip(management_network)| regex_replace('\d+.\d+.\d+.', '10.3.0.') }}/16
+      ignore_errors: yes
+
+    - name: add 10.4.0.x IP addresses
+      command: ip addr add dev bond0 {{ hostvars[ansible_hostname]|find_ip(management_network)| regex_replace('\d+.\d+.\d+.', '10.4.0.') }}/16
+      ignore_errors: yes
+
+    - name: add 10.5.0.x IP addresses
+      command: ip addr add dev bond0 {{ hostvars[ansible_hostname]|find_ip(management_network)| regex_replace('\d+.\d+.\d+.', '10.5.0.') }}/16
+      ignore_errors: yes
+
+    - name: add 10.6.0.x IP addresses
+      command: ip addr add dev bond0 {{ hostvars[ansible_hostname]|find_ip(management_network)| regex_replace('\d+.\d+.\d+.', '10.6.0.') }}/16
+      ignore_errors: yes
+
     # - name: update apt cache
     #   apt: 
     #     update_cache: yes
@@ -44,23 +64,26 @@
     #   include: reboot.yaml
     #   when: installed_kernel.stdout != running_kernel.stdout
 
-    - name: ensure chrony server is stopped
-      service: 
-        name: chrony
-        state: stopped
+    # - name: ensure chrony server is stopped
+    #   service: 
+    #     name: chrony
+    #     state: stopped
 
-    - name: install chrony.conf 
-      template: 
-        src: templates/etc/chrony/chrony.conf 
-        dest: /etc/chrony/chrony.conf 
-        owner: root 
-        group: root 
-        mode: 0644
+    # - name: install chrony.conf 
+    #   template: 
+    #     src: templates/etc/chrony/chrony.conf 
+    #     dest: /etc/chrony/chrony.conf 
+    #     owner: root 
+    #     group: root 
+    #     mode: 0644
 
-    - name: set clocks to public ntp server
-      command: ntpdate {{ external_ntp_host }}
-      ignore_errors: yes
+    # - name: set clocks to public ntp server
+    #   command: ntpdate {{ external_ntp_host }}
+    #   ignore_errors: yes
 
+    ############################
+    ## disabled in original repo:
+    ############################
     # register: ntpdate_result
     # until: ntpdate_result|success
     # retries: 5
@@ -81,14 +104,16 @@
     #  retries: 5
     #  delay: 5
 
-    - name: save system clock to hardware
-      command: hwclock --systohc
+    ###############################
 
-    - name: make sure chrony is started and enabled everywhere
-      service: 
-        name: chrony
-        state: restarted 
-        enabled: yes
+    # - name: save system clock to hardware
+    #   command: hwclock --systohc
+
+    # - name: make sure chrony is started and enabled everywhere
+    #   service: 
+    #     name: chrony
+    #     state: restarted 
+    #     enabled: yes
 
 # - include: virtualbox.yaml
 #   when: ansible_virtualization_type|defined and ansible_virtualization_type == "virtualbox"

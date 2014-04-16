@@ -17,6 +17,9 @@
     config_files:
       - "{{ component }}.conf"
       - api-paste.ini
+      - nfs_shares
+  vars_files:
+    - ../../secret.yml
 
   tasks:
 
@@ -28,12 +31,12 @@
         cache_valid_time: 600
       with_items: packages
 
-    - name: create cinder-volumes volume group
-      lvg:
-        vg: cinder-volumes
-        pvs: "/dev/{{ volume_devices|join(',/dev/') }}"
-        state: present
-        vg_options: ""
+    # - name: create cinder-volumes volume group
+    #   lvg:
+    #     vg: cinder-volumes
+    #     pvs: "/dev/{{ volume_devices|join(',/dev/') }}"
+    #     state: present
+    #     vg_options: ""
 
     - name: ensure services are stopped
       service: 

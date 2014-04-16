@@ -1,2 +1,4 @@
 ---
 volume_devices: [ loop0 ]
+netapp_server_hostname: "10.1.0.11"
+netapp_volume_list: "ephemeral"

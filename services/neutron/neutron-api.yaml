@@ -78,8 +78,9 @@
         login_password: "{{ admin_password }}"
         name: "{{ external_network_name }}"
         router_external: True
-        provider_network_type: gre
-        provider_segmentation_id: 6
+        provider_network_type: vlan
+        provider_segmentation_id: 100
+        provider_physical_network: "physnet1"
         state: present
 
     - name: ensure subnet for external network is registered

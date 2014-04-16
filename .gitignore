@@ -2,3 +2,4 @@
 credentials
 vms
 testcases/standard/.vagrant
+secret.yml

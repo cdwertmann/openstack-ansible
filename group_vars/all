@@ -1,5 +1,5 @@
 ---
-external_ntp_host: pool.ntp.org
+external_ntp_host: au.pool.ntp.org
 
 openstack_region: RegionOne
 
